@@ -33,6 +33,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,7 +89,7 @@
             this.button3.Location = new System.Drawing.Point(34, 146);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(242, 226);
-            this.button3.TabIndex = 4;
+            this.button3.TabIndex = 5;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
