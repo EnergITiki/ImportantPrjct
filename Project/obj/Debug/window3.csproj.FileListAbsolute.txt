@@ -1,0 +1,54 @@
+D:\Visual Studio\window3\obj\Debug\window3.csprojAssemblyReference.cache
+D:\Visual Studio\window3\obj\Debug\window3.mainForm.resources
+D:\Visual Studio\window3\obj\Debug\window3.Properties.Resources.resources
+D:\Visual Studio\window3\obj\Debug\window3.csproj.GenerateResource.cache
+D:\Visual Studio\window3\bin\Debug\window3.exe.config
+D:\Visual Studio\window3\bin\Debug\window3.exe
+D:\Visual Studio\window3\bin\Debug\window3.pdb
+D:\Visual Studio\window3\obj\Debug\window3.exe
+D:\Visual Studio\window3\obj\Debug\window3.pdb
+D:\Visual Studio\window3\obj\Debug\window3.loginForm.resources
+D:\Visual Studio\window3\obj\Debug\window3.teleForm.resources
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\window3.exe.config
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\window3.exe
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\window3.pdb
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\Newtonsoft.Json.dll
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\Newtonsoft.Json.xml
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.csprojAssemblyReference.cache
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.idForm.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.loginForm.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.mainForm.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.Properties.Resources.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.regForm.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.teleForm.resources
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.csproj.GenerateResource.cache
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.csproj.CopyComplete
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.exe
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.pdb
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\window3.exe.config
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\window3.exe
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\window3.pdb
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.idForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.loginForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.mainForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.Properties.Resources.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.regForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.teleForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.csproj.GenerateResource.cache
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.csproj.CopyComplete
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.exe
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.pdb
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.csprojAssemblyReference.cache
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.reptForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.reptForm.resources
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\GMap.NET.Core.dll
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\GMap.NET.WindowsForms.dll
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\GMap.NET.Core.xml
+D:\Education\НТИ\NTI_Project\Project\bin\Debug\GMap.NET.WindowsForms.xml
+D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.mapForm.resources
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\GMap.NET.Core.xml
+C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\GMap.NET.WindowsForms.xml
+C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.mapForm.resources
