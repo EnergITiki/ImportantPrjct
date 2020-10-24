@@ -7,13 +7,12 @@ using Newtonsoft.Json;
 
 namespace window3
 {
-    class WebRequests
+    class Analize
     {
         System.Net.WebRequest request;
         string postData;
-        user curuser = new user();
 
-        public WebRequests()
+        public Analize()
         {
         }
         public user login(string login, string password)

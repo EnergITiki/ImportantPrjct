@@ -56,9 +56,6 @@ C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\wi
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.idForm.resources
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.mainForm.resources
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.Properties.Resources.resources
-C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.regForm.resources
-C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.reptForm.resources
-C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.teleForm.resources
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.GenerateResource.cache
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe
@@ -71,7 +68,6 @@ C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\GM
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\GMap.NET.WindowsForms.xml
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
-C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.ResolveComReference.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csprojAssemblyReference.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.exe
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.pdb
@@ -91,3 +87,5 @@ C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.teleForm
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.GenerateResource.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\System.Data.SQLite.dll
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe.config

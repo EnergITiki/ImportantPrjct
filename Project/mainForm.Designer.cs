@@ -47,6 +47,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.labelError = new System.Windows.Forms.Label();
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,11 +77,12 @@
             this.menuStrip1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.выходToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 547);
+            this.выходToolStripMenuItem,
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 545);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 26);
+            this.menuStrip1.Size = new System.Drawing.Size(1102, 28);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,7 +90,7 @@
             // 
             this.выходToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(71, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(71, 26);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.ВыходToolStripMenuItem_Click);
             // 
@@ -162,7 +165,8 @@
             // filePicker
             // 
             this.filePicker.FileName = "openFileDialog1";
-            this.filePicker.Filter = "Таблицы Microsoft Office|*.xlsx";
+            this.filePicker.Filter = "Таблицы Microsoft Office|*.xlsx,*.xls";
+            this.filePicker.FileOk += new System.ComponentModel.CancelEventHandler(this.filePicker_FileOk);
             // 
             // label1
             // 
@@ -219,6 +223,7 @@
             this.button2.TabIndex = 13;
             this.button2.Text = "Выбрать...";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -254,6 +259,7 @@
             this.button3.TabIndex = 16;
             this.button3.Text = "Готово";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // checkBox1
             // 
@@ -279,12 +285,32 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "В файле обе таблицы";
             // 
+            // labelError
+            // 
+            this.labelError.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(619, 337);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(288, 78);
+            this.labelError.TabIndex = 19;
+            this.labelError.Text = " ";
+            this.labelError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // выбратьСетевуюПапкуСБДToolStripMenuItem
+            // 
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Name = "выбратьСетевуюПапкуСБДToolStripMenuItem";
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Size = new System.Drawing.Size(249, 24);
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Text = "Выбрать сетевую папку с БД";
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Click += new System.EventHandler(this.выбратьСетевуюПапкуСБДToolStripMenuItem_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ClientSize = new System.Drawing.Size(1077, 573);
+            this.ClientSize = new System.Drawing.Size(1102, 573);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
@@ -338,5 +364,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.ToolStripMenuItem выбратьСетевуюПапкуСБДToolStripMenuItem;
     }
 }

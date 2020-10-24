@@ -58,6 +58,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,25 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="regForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="regForm.Designer.cs">
-      <DependentUpon>regForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="reptForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="reptForm.Designer.cs">
-      <DependentUpon>reptForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Structs.cs" />
-    <Compile Include="teleForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="teleForm.Designer.cs">
-      <DependentUpon>teleForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="WebRequests.cs" />
     <EmbeddedResource Include="idForm.resx">
       <DependentUpon>idForm.cs</DependentUpon>
@@ -120,15 +105,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="regForm.resx">
-      <DependentUpon>regForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="reptForm.resx">
-      <DependentUpon>reptForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="teleForm.resx">
-      <DependentUpon>teleForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
