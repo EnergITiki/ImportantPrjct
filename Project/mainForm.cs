@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SQLite;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -27,7 +20,10 @@ namespace window3
         Word._Document oDoc;
         String pathLEP = "";
         String pathPS = "";
-        bool pathButt = false;
+        String DB = "";
+        SQLRequests localDB = new SQLRequests();
+        SQLRequests remoteDB = new SQLRequests();
+        int pathButt = 0;
 
         public mainForm()
         {
@@ -38,7 +34,11 @@ namespace window3
         private void mainForm_Load(object sender, EventArgs e)
         {
             ClientSize = new System.Drawing.Size(535, ClientSize.Height);
-            
+            localDB.Connect("local.db");
+            if (localDB.isThereRes("SELECT name from sqlite_master where type= \"table\"")){
+                DataTable res = localDB.getResTable("SELECT path FROM config");
+                DB = res.Rows[0].ItemArray[0].ToString();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,8 +72,8 @@ namespace window3
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            pathButt = false;
-            filePicker.ShowDialog();
+            pathButt = 0;
+            tablePicker.ShowDialog();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -233,27 +233,62 @@ namespace window3
             }
             labelError.Text = "";
 
-             ClientSize = new System.Drawing.Size(535, ClientSize.Height);
-            
+            Excel.Application excelApp = new Excel.Application();
+            if (excelApp == null)
+            {
+                MessageBox.Show("Excel is not installed!!");
+                return;
+            }
+            Excel.Workbook excelBook = excelApp.Workbooks.Open(pathLEP);
+            Excel.Worksheet excelSheet = excelBook.Sheets[1];
+            Excel.Range excelRange = excelSheet.UsedRange;
+            excelApp.Visible = true;
+            int rows = excelRange.Rows.Count;
+            int cols = excelRange.Columns.Count;
+
+            //////////////          СЧИТЫВАЕМ ПЕРВУЮ СТРОКУ, ИЩЕМ НАЗВАНИЕ           //////////////
+
+            //////////////          ИЩЕМ PT           //////////////
+            for (int i = 1; i <= rows; i++)
+            {
+                for (int j = 1; j <= cols; j++)
+                {
+                    if (excelRange.Cells[i, j].Value2 != null)
+                        excelSheet.Cells[1,1] = "1";
+                }
+            }
+            excelApp.Quit();
+            ClientSize = new System.Drawing.Size(535, ClientSize.Height);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            pathButt = true;
-            filePicker.ShowDialog();
+            pathButt = 1;
+            tablePicker.ShowDialog();
         }
 
         private void filePicker_FileOk(object sender, CancelEventArgs e)
         {
-            if (!pathButt)
-                pathLEP = ((OpenFileDialog)sender).FileName;
-            else
-                pathPS = ((OpenFileDialog)sender).FileName;
+            switch (pathButt)
+            {
+                case 0:
+                    pathLEP = ((OpenFileDialog)sender).FileName;
+                    break;
+                case 1:
+                    pathPS = ((OpenFileDialog)sender).FileName;
+                    break;
+            }
         }
 
         private void выбратьСетевуюПапкуСБДToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DBPicker.ShowDialog();
+        }
 
+        private void DBPicker_FileOk(object sender, CancelEventArgs e)
+        {
+            DB = ((OpenFileDialog)sender).FileName;
+            localDB.makeQuery("update config set path = \"" + DB + "\" where id = 1");
         }
     }
 }

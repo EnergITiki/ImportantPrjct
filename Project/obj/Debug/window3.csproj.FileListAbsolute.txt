@@ -89,3 +89,18 @@ C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.C
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\System.Data.SQLite.dll
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe.config
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.exe.config
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.exe
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.pdb
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csprojAssemblyReference.cache
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.idForm.resources
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.mainForm.resources
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.Properties.Resources.resources
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.GenerateResource.cache
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.pdb
+C:\Users\User\Source\Repos\EnergITiki\ImportantPrjct\Project\bin\Debug\System.Data.SQLite.dll
