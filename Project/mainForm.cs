@@ -9,19 +9,18 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace window3
 {
 
     public partial class mainForm : Form
     {
+        
         bool flag = false;
         regForm reg = new regForm();
-        loginForm login = new loginForm();
         idForm idform = new idForm();
-        user curuser = new user();
         teleForm tele = new teleForm();
-        mapForm map = new mapForm();
 
         public mainForm()
         {
@@ -37,7 +36,33 @@ namespace window3
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            mapButton.Visible = false;
+            Excel.Application excelApp = new Excel.Application();
+
+            if (excelApp == null)
+            {
+                Console.WriteLine("Excel is not installed!!");
+                return;
+            }
+
+            Excel.Workbook excelBook = excelApp.Workbooks.Open(@"E:\readExample.xlsx");
+            Excel._Worksheet excelSheet = excelBook.Sheets[1];
+            Excel.Range excelRange = excelSheet.UsedRange;
+
+            int rows = excelRange.Rows.Count;
+            int cols = excelRange.Columns.Count;
+
+            for (int i = 1; i <= rows; i++)
+            {
+                // read new line
+                for (int j = 1; j <= cols; j++)
+                {
+                    //write to cell
+                    if (excelRange.Cells[i, j] != null && excelRange.Cells[i, j].Value2 != null) ;
+                        //
+
+                }
+            }
+            excelApp.Quit();
         }
 
         //Разворачивание из трея при двойной нажатии на иконку
@@ -67,31 +92,11 @@ namespace window3
         //"Регистрация" => "Личный кабинет"
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            login.ShowDialog();          
-            if (login.result.sex < 3)
-            {
-                curuser = login.result;
-                
-                buttonEnter.Text = "Телеметрия";
-                buttonEnter.Click -= button1_Click;
-                buttonEnter.Click += new System.EventHandler(next_button1_Click);
-
-                idButton.Text = "Личный кабинет";
-                idButton.Click += new System.EventHandler(idButton_Click_1);
-                idButton.Visible = true;
-                mapButton.Visible = true;
-                if(curuser.perm_level==3)
-                    regButton.Visible = true;
-                nameLabel.Text = curuser.name;
-            }
-            this.Show();
         }
 
         //При нажатии открывается форма Телеметрия
         private void next_button1_Click(object sender, EventArgs e)
         {
-            tele.curuser = curuser;
             tele.ShowDialog();   
         }
 
@@ -105,8 +110,6 @@ namespace window3
         //При нажатии открывается личный кабинет при условии входа в учетную запись
         private void idButton_Click_1(object sender, EventArgs e)
         {
-            idform.curuser = curuser;
-            idform.ShowDialog();
         }
 
         //Завершение работы из трея
@@ -114,19 +117,6 @@ namespace window3
         {
             flag = true;
             this.Close();
-        }
-
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            map.ShowDialog();
-        }
-
-        private void Button2_Click_1(object sender, EventArgs e)
-        {
-            this.Hide();
-            reg.curuser = curuser;
-            reg.ShowDialog();
-            this.Show();
         }
     }
 }

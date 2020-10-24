@@ -52,3 +52,23 @@ D:\Education\НТИ\NTI_Project\Project\obj\Debug\window3.mapForm.resources
 C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\GMap.NET.Core.xml
 C:\Users\user\source\repos\NTI_Project\Project\bin\Debug\GMap.NET.WindowsForms.xml
 C:\Users\user\source\repos\NTI_Project\Project\obj\Debug\window3.mapForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csprojAssemblyReference.cache
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.idForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.mainForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.Properties.Resources.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.regForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.reptForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.teleForm.resources
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.GenerateResource.cache
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.pdb
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.exe.config
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.exe
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\window3.pdb
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\GMap.NET.Core.xml
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\GMap.NET.WindowsForms.xml
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
+C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.csproj.ResolveComReference.cache

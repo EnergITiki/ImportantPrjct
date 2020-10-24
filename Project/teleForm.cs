@@ -194,9 +194,8 @@ namespace window3
             par.DropDown.AutoClose = false;
             id_dev.DropDown.MouseLeave += new System.EventHandler(TeleForm_Leave);
             par.DropDown.MouseLeave += new System.EventHandler(TeleForm_Leave);
-            update();
-            dPicker1.Value = dataList[0].dattim;
-            dPicker2.Value = dataList[dataList.Count - 1].dattim;
+            //dPicker1.Value = dataList[0].dattim;
+            //dPicker2.Value = dataList[dataList.Count - 1].dattim;
         }
 
         private void par_checkAll_Click(object sender, EventArgs e)
@@ -288,23 +287,5 @@ namespace window3
             rept.critParam = client.getCritData(curuser.login, curuser.password);
             rept.Show();
         }
-
-        void update()
-        {
-            WebRequests client = new WebRequests();
-            dataList = client.getDevData(curuser.login, curuser.password);
-            devListUpdate();
-            for (int i = 0; i < dataList.Count; i++)
-            {
-                devCommit tempCom = dataList[i]; tempCom.getDate(); dataList[i] = tempCom;
-            }
-            dPicker1.MaxDate = dataList[dataList.Count - 1].dattim;
-            dPicker1.MinDate = dataList[0].dattim;
-            dPicker2.MaxDate = dataList[dataList.Count - 1].dattim;
-            dPicker2.MinDate = dataList[0].dattim;
-            draw();
-        }
-
-        private void Timer1_Tick(object sender, EventArgs e){ update();}
     }
 }

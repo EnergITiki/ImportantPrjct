@@ -46,9 +46,9 @@
             this.showButton = new System.Windows.Forms.Button();
             this.insertButton = new System.Windows.Forms.Button();
             this.infoBox = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.id.SuspendLayout();
             this.id_devMenu.SuspendLayout();
             this.infoBox.SuspendLayout();
@@ -101,7 +101,7 @@
             this.dev_checkAll.CheckOnClick = true;
             this.dev_checkAll.ForeColor = System.Drawing.Color.White;
             this.dev_checkAll.Name = "dev_checkAll";
-            this.dev_checkAll.Size = new System.Drawing.Size(193, 26);
+            this.dev_checkAll.Size = new System.Drawing.Size(224, 26);
             this.dev_checkAll.Text = "Отметить все";
             this.dev_checkAll.Click += new System.EventHandler(this.dev_checkAll_Click);
             // 
@@ -180,7 +180,7 @@
             this.dPicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dPicker1.Location = new System.Drawing.Point(470, 6);
             this.dPicker1.Name = "dPicker1";
-            this.dPicker1.Size = new System.Drawing.Size(170, 22);
+            this.dPicker1.Size = new System.Drawing.Size(170, 25);
             this.dPicker1.TabIndex = 4;
             this.dPicker1.TextChanged += new System.EventHandler(this.DPicker_ValueChanged);
             // 
@@ -190,7 +190,7 @@
             this.dPicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dPicker2.Location = new System.Drawing.Point(693, 6);
             this.dPicker2.Name = "dPicker2";
-            this.dPicker2.Size = new System.Drawing.Size(170, 22);
+            this.dPicker2.Size = new System.Drawing.Size(170, 25);
             this.dPicker2.TabIndex = 5;
             this.dPicker2.TextChanged += new System.EventHandler(this.DPicker_ValueChanged);
             // 
@@ -201,27 +201,27 @@
             this.fdToolStripMenuItem,
             this.toolStripMenuItem1});
             this.id_devMenu.Name = "id_devMenu";
-            this.id_devMenu.Size = new System.Drawing.Size(93, 52);
+            this.id_devMenu.Size = new System.Drawing.Size(94, 52);
             // 
             // fdToolStripMenuItem
             // 
             this.fdToolStripMenuItem.Name = "fdToolStripMenuItem";
-            this.fdToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
+            this.fdToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
             this.fdToolStripMenuItem.Text = "fd";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(92, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(93, 24);
             // 
             // showButton
             // 
             this.showButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showButton.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.showButton.ForeColor = System.Drawing.Color.White;
-            this.showButton.Location = new System.Drawing.Point(68, 486);
+            this.showButton.Location = new System.Drawing.Point(68, 516);
             this.showButton.Name = "showButton";
-            this.showButton.Size = new System.Drawing.Size(248, 37);
+            this.showButton.Size = new System.Drawing.Size(248, 39);
             this.showButton.TabIndex = 10;
             this.showButton.Text = "Показать отчёт";
             this.showButton.UseVisualStyleBackColor = true;
@@ -232,9 +232,9 @@
             this.insertButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.insertButton.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.insertButton.ForeColor = System.Drawing.Color.White;
-            this.insertButton.Location = new System.Drawing.Point(543, 486);
+            this.insertButton.Location = new System.Drawing.Point(543, 516);
             this.insertButton.Name = "insertButton";
-            this.insertButton.Size = new System.Drawing.Size(244, 37);
+            this.insertButton.Size = new System.Drawing.Size(244, 39);
             this.insertButton.TabIndex = 11;
             this.insertButton.Text = "Добавить запись";
             this.insertButton.UseVisualStyleBackColor = true;
@@ -243,10 +243,29 @@
             // 
             this.infoBox.AutoScroll = true;
             this.infoBox.Controls.Add(this.chart1);
-            this.infoBox.Location = new System.Drawing.Point(68, 64);
+            this.infoBox.Location = new System.Drawing.Point(68, 68);
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(719, 407);
+            this.infoBox.Size = new System.Drawing.Size(719, 432);
             this.infoBox.TabIndex = 12;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(136, 67);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(300, 319);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            title1.Name = "Title1";
+            this.chart1.Titles.Add(title1);
             // 
             // label1
             // 
@@ -272,32 +291,13 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "До:";
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(136, 63);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(300, 300);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            title1.Name = "Title1";
-            this.chart1.Titles.Add(title1);
-            // 
             // teleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ClientSize = new System.Drawing.Size(891, 554);
+            this.ClientSize = new System.Drawing.Size(891, 589);
             this.Controls.Add(this.insertButton);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.label2);
