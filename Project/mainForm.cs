@@ -21,6 +21,9 @@ namespace window3
         regForm reg = new regForm();
         idForm idform = new idForm();
         teleForm tele = new teleForm();
+        String pathLEP = "";
+        String pathPS = "";
+
 
         public mainForm()
         {
@@ -36,33 +39,33 @@ namespace window3
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            Excel.Application excelApp = new Excel.Application();
+            //Excel.Application excelApp = new Excel.Application();
 
-            if (excelApp == null)
-            {
-                Console.WriteLine("Excel is not installed!!");
-                return;
-            }
+            //if (excelApp == null)
+            //{
+            //    Console.WriteLine("Excel is not installed!!");
+            //    return;
+            //}
 
-            Excel.Workbook excelBook = excelApp.Workbooks.Open(@"E:\readExample.xlsx");
-            Excel._Worksheet excelSheet = excelBook.Sheets[1];
-            Excel.Range excelRange = excelSheet.UsedRange;
+            //Excel.Workbook excelBook = excelApp.Workbooks.Open(@"E:\readExample.xlsx");
+            //Excel._Worksheet excelSheet = excelBook.Sheets[1];
+            //Excel.Range excelRange = excelSheet.UsedRange;
 
-            int rows = excelRange.Rows.Count;
-            int cols = excelRange.Columns.Count;
+            //int rows = excelRange.Rows.Count;
+            //int cols = excelRange.Columns.Count;
 
-            for (int i = 1; i <= rows; i++)
-            {
-                // read new line
-                for (int j = 1; j <= cols; j++)
-                {
-                    //write to cell
-                    if (excelRange.Cells[i, j] != null && excelRange.Cells[i, j].Value2 != null) ;
-                        //
+            //for (int i = 1; i <= rows; i++)
+            //{
+            //    // read new line
+            //    for (int j = 1; j <= cols; j++)
+            //    {
+            //        //write to cell
+            //        if (excelRange.Cells[i, j] != null && excelRange.Cells[i, j].Value2 != null) ;
+            //            //
 
-                }
-            }
-            excelApp.Quit();
+            //    }
+            //}
+            //excelApp.Quit();
         }
 
         //Разворачивание из трея при двойной нажатии на иконку
@@ -70,28 +73,14 @@ namespace window3
         {
             Show();
             WindowState = FormWindowState.Normal;
-        }
-
-        //Сворачивание приложения в трей при нажатии на крестик
-        public void mainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Hide();
-            this.ShowInTaskbar = false;
-            e.Cancel = true;
-            if (flag == true)
-            {
-                e.Cancel = false;
-                flag = false;
-            }
-        }
-        
-        //При нажатии на кнопку открытие формы регистрации 
+        }        
 
         //При входе в учетную запись на главном экране переопределяются кнопки
         //"Вход" => "Телеметрия"
         //"Регистрация" => "Личный кабинет"
         private void button1_Click(object sender, EventArgs e)
         {
+            Size.Width = 123;
         }
 
         //При нажатии открывается форма Телеметрия
@@ -117,6 +106,26 @@ namespace window3
         {
             flag = true;
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            filePicker.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            button2.Enabled = !((CheckBox)sender).Checked;
         }
     }
 }
