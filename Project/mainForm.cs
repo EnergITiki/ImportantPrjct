@@ -542,7 +542,6 @@ namespace window3
                             nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
                             query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
                             remoteDB.makeQuery(query);
-                            i++;
                             break;
                         }
                         i++;
