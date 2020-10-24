@@ -1,10 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
+using System.Reflection;
+using System.Windows.Forms.DataVisualization.Charting;
+//using Microsoft.Office.Interop.Word;
 
 namespace window3
 {
@@ -112,22 +116,219 @@ namespace window3
             oTable.Borders.InsideLineStyle = Word.WdLineStyle.wdLineStyleEmboss3D;//стиль границ
         }
 
+        double PictureNum = 1.1;
+
         public void RES( string CompName, string FilialName) //РЭСы филиалов 
         {
             //Обращаемся к БД нахуй
+            string[] NameRES = new string[1];//Имена РЭСов
+            NameRES[0] = "RAS";
+
+            //
+
+
+            string str = "На рисунке " + PictureNum.ToString() + " приведена возрастная структура " +
+                "линий электропередачи и подстанций 110 кВ " + NameRES[0] + " по состоянию на 01.01.2019 " +
+                "г., обслуживаемых " + FilialName;
+            PrintText(str, 12, 0, 0, 5);
+
+
+            //Рисуем Диаграммы нахуй
+            //Обращаемся к базам данных блять!!!!
+            //Подстанции
+            double[] Pods = new double[3];
+            Pods[0] = 60;
+            Pods[1] = 20;
+            Pods[2] = 20;
+            double PodsAll = Pods[0] + Pods[1] + Pods[2];
+
+
+            //Трансформаторы
+            double[] Trans = new double[3];
+            Trans[0] = 60;
+            Trans[1] = 20;
+            Trans[2] = 20;
+            double TransAll = Trans[0] + Trans[1] + Trans[2];
+
+            //ВЛ
+            double[] VL = new double[3];
+            VL[0] = 60;
+            VL[1] = 20;
+            VL[2] = 20;
+            double VLAll = VL[0] + VL[1] + VL[2];
+
+            //КЛ
+            double[] KL = new double[3];
+            KL[0] = 60;
+            KL[1] = 20;
+            KL[2] = 20;
+            double KLAll = KL[0] + KL[1] + KL[2];
+
+            //Подстанции**********************
+            chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart1.Series[0].IsValueShownAsLabel = true; // метки становятся видимыми
+            chart1.Series[0].LabelFormat = "{#0}"; // формат отображения "{#0}"
+            chart1.Titles.Add("Подстанции (штук, %) 110 кВ");
+            chart1.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            chart1.Legends[0].Font = new Font("Times New Roman", 9);
+          
+            chart1.Series[0].Points.AddY(Pods[0]);
+            chart1.Series[0].Points.AddY(Pods[1]);
+            chart1.Series[0].Points.AddY(Pods[2]);
+
+            chart1.Series[0].Points[0].YValues[0] = Pods[0];
+            chart1.Series[0].Points[1].YValues[0] = Pods[1];
+            chart1.Series[0].Points[2].YValues[0] = Pods[2];
+
+            chart1.Series[0].Points[0].LegendText = "свыше 50 лет";
+            chart1.Series[0].Points[1].LegendText = "от 26 до 50 лет";
+            chart1.Series[0].Points[2].LegendText = "до 25 лет";
+
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
 
 
 
+            //Сохраняем епта
+            chart1.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
 
-            /*
+            string pathFileImage = "D:\\test1.jpeg";
 
+            // Загружаем исходное изображение
+            var image1 = new Bitmap(pathFileImage);
 
-На рисунке 4.3 приведена возрастная структура линий электропередачи и подстанций
-110 кВ [энергосистемы] по состоянию на 01.01.2019 г., обслуживаемых [сетевым предприятием
-1].
- * 
- */
+            // Масштабируем до нужного размера
+            var image2 = new Bitmap(image1, 600, 400);
+            image2.Save("D:\\test2.jpeg");
 
+            var pPicture = oDoc.Paragraphs.Last.Range;
+            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
+
+            image1.Dispose();
+            image2.Dispose();
+
+            //Трансформаторы*******************
+            chart2.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart2.Series[0].IsValueShownAsLabel = true; // метки становятся видимыми
+            chart2.Series[0].LabelFormat = "{#0}"; // формат отображения "{#0}"
+            chart2.Titles.Add("Трансформаторы (МВА, %) 110 кВ");
+            chart2.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            chart2.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart2.Series[0].Points.AddY(Trans[0]);
+            chart2.Series[0].Points.AddY(Trans[1]);
+            chart2.Series[0].Points.AddY(Trans[2]);
+
+            chart2.Series[0].Points[0].YValues[0] = Trans[0];
+            chart2.Series[0].Points[1].YValues[0] = Trans[1];
+            chart2.Series[0].Points[2].YValues[0] = Trans[2];
+
+            chart2.Series[0].Points[0].LegendText = "свыше 50 лет";
+            chart2.Series[0].Points[1].LegendText = "от 26 до 50 лет";
+            chart2.Series[0].Points[2].LegendText = "до 25 лет";
+
+            chart2.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            //Сохраняем епта
+            chart2.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            pathFileImage = "D:\\test1.jpeg";
+
+            // Загружаем исходное изображение
+            image1 = new Bitmap(pathFileImage);
+
+            // Масштабируем до нужного размера
+            image2 = new Bitmap(image1, 600, 400);
+            image2.Save("D:\\test2.jpeg");
+
+            pPicture = oDoc.Paragraphs.Last.Range;
+            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
+
+            image1.Dispose();
+            image2.Dispose();
+
+            //ВЛ************************
+            chart3.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart3.Series[0].IsValueShownAsLabel = true; // метки становятся видимыми
+            chart3.Series[0].LabelFormat = "{#0}"; // формат отображения "{#0}"
+            chart3.Titles.Add("Воздушные линии электропередачи в одноцепном исчислении(км, %) 110 кВ");
+            chart3.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            chart3.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart3.Series[0].Points.AddY(VL[0]);
+            chart3.Series[0].Points.AddY(VL[1]);
+            chart3.Series[0].Points.AddY(VL[2]);
+
+            chart3.Series[0].Points[0].YValues[0] = VL[0];
+            chart3.Series[0].Points[1].YValues[0] = VL[1];
+            chart3.Series[0].Points[2].YValues[0] = VL[2];
+
+            chart3.Series[0].Points[0].LegendText = "свыше 50 лет";
+            chart3.Series[0].Points[1].LegendText = "от 36 до 50 лет";
+            chart3.Series[0].Points[2].LegendText = "до 35 лет";
+
+            chart3.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            //Сохраняем епта
+            chart3.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            pathFileImage = "D:\\test1.jpeg";
+
+            // Загружаем исходное изображение
+            image1 = new Bitmap(pathFileImage);
+
+            // Масштабируем до нужного размера
+            image2 = new Bitmap(image1, 600, 400);
+            image2.Save("D:\\test2.jpeg");
+
+            pPicture = oDoc.Paragraphs.Last.Range;
+            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
+
+            image1.Dispose();
+            image2.Dispose();
+
+            //КЛ************************
+            chart4.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            chart4.Series[0].IsValueShownAsLabel = true; // метки становятся видимыми
+            chart4.Series[0].LabelFormat = "{#0}"; // формат отображения "{#0}"
+            chart4.Titles.Add("Кабельные линии электропередачи в одноцепном исчислении(км, %) 110 кВ");
+            chart4.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            chart4.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart4.Series[0].Points.AddY(KL[0]);
+            chart4.Series[0].Points.AddY(KL[1]);
+            chart4.Series[0].Points.AddY(KL[2]);
+
+            chart4.Series[0].Points[0].YValues[0] = KL[0];
+            chart4.Series[0].Points[1].YValues[0] = KL[1];
+            chart4.Series[0].Points[2].YValues[0] = KL[2];
+
+            chart4.Series[0].Points[0].LegendText = "свыше 50 лет";
+            chart4.Series[0].Points[1].LegendText = "от 36 до 50 лет";
+            chart4.Series[0].Points[2].LegendText = "до 35 лет";
+
+            chart4.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            //Сохраняем епта
+            chart4.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            pathFileImage = "D:\\test1.jpeg";
+
+            // Загружаем исходное изображение
+            image1 = new Bitmap(pathFileImage);
+
+            // Масштабируем до нужного размера
+            image2 = new Bitmap(image1, 600, 400);
+            image2.Save("D:\\test2.jpeg");
+
+            pPicture = oDoc.Paragraphs.Last.Range;
+            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
+
+            image1.Dispose();
+            image2.Dispose();
+
+            System.IO.File.Delete(@"D:\\test1.jpeg");
+            System.IO.File.Delete(@"D:\\test2.jpeg");
+      
 
         }
         public void Filials(string CompName)//Филиалы
@@ -279,47 +480,6 @@ namespace window3
 
             //в цикле блять хуячим компании
             Companies();
-
-
-
-
-
-
-
-            // Вставка текста после таблицы
-            /* Word.Paragraph oPara4;
-
-             oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
-
-             oPara4 = oDoc.Content.Paragraphs.Add(ref oRng);
-
-             oPara4.Range.InsertParagraphBefore(); // Вставка отступ до с параметром 24 пт. (подтягиваем из oPara3 по умолчанию)
-
-             oPara4.Range.Text = "Вставляем другую таблицу:";
-
-             oPara4.Format.SpaceAfter = 24;
-
-             oPara4.Range.InsertParagraphAfter(); // Вставка оступа после с параметром 24 пт.*/
-
-
-
-            // Вставка таблицы 5 на 2, заполнение данными, и изменение размера ширины столбцов
-            /*wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
-
-            oTable = oDoc.Tables.Add(wrdRng, 5, 2);
-
-            oTable.Range.ParagraphFormat.SpaceAfter = 6;
-
-            for (r = 1; r <= 5; r++)
-            {
-                for (c = 1; c <= 2; c++)
-                { 
-                    strText = "r" + r + "c" + c;
-                    oTable.Cell(r, c).Range.Text = strText;
-                }
-                oTable.Columns[1].Width = oWord.InchesToPoints(2); // Изменение ширины столбца 1
-                oTable.Columns[2].Width = oWord.InchesToPoints(3); // Изменение ширины столбца 2
-            }*/
 
 
         }
