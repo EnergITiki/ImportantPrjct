@@ -81,11 +81,10 @@ C:\Users\Илья\source\repos\ImportantPrjct\Project\bin\Debug\Newtonsoft.Json.
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.idForm.resources
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.mainForm.resources
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.Properties.Resources.resources
-C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.regForm.resources
-C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.reptForm.resources
-C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.teleForm.resources
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.GenerateResource.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.CoreCompileInputs.cache
 C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.csproj.CopyComplete
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\bin\Debug\System.Data.SQLite.dll
 C:\Users\Home Laptop\source\repos\EnergITiki\ImportantPrjct\Project\obj\Debug\window3.exe.config
+C:\Users\Илья\source\repos\ImportantPrjct\Project\bin\Debug\System.Data.SQLite.dll
+C:\Users\Илья\source\repos\ImportantPrjct\Project\obj\Debug\window3.exe.config
