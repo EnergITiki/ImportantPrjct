@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Office.Interop.Word;
 
 namespace window3
 {
@@ -104,7 +103,7 @@ namespace window3
             Word.Table oTable;
             Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
             oTable = oDoc.Tables.Add(wrdRng, 2, 2); // 2 строки, 2 столбцов
-            oTable.Range.Rows.Alignment = WdRowAlignment.wdAlignRowCenter;
+            oTable.Range.Rows.Alignment = Word.WdRowAlignment.wdAlignRowCenter;
             oTable.Range.ParagraphFormat.SpaceAfter = 5;
             oTable.Cell(1, 1).Range.Text = "Протяженность действующих ВЛ и КЛ (в одноцепном исчислении), км";
             oTable.Cell(1, 2).Range.Text = "ВЛ - " + VL.ToString() + "\n" + "КЛ - " + KL.ToString();
@@ -327,7 +326,7 @@ namespace window3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!(File.Exists(pathPS) && File.Exists(pathLEP) && 
+            if (!(File.Exists(pathPS) && File.Exists(pathLEP) &&
                 (Path.GetExtension(pathPS) == ".xls" || Path.GetExtension(pathPS) == ".xlsx") &&
                 (Path.GetExtension(pathLEP) == ".xls" || Path.GetExtension(pathLEP) == ".xlsx")))
             {
@@ -345,19 +344,79 @@ namespace window3
             Excel.Workbook excelBook = excelApp.Workbooks.Open(pathLEP);
             Excel.Worksheet excelSheet = excelBook.Sheets[1];
             Excel.Range excelRange = excelSheet.UsedRange;
-            excelApp.Visible = true;
+            String str;
             int rows = excelRange.Rows.Count;
             int cols = excelRange.Columns.Count;
 
             //////////////          СЧИТЫВАЕМ ПЕРВУЮ СТРОКУ, ИЩЕМ НАЗВАНИЕ           //////////////
 
             //////////////          ИЩЕМ PT           //////////////
+            double num = 0;
+            int rowOfNum = 0;
+            String cell = "";
             for (int i = 1; i <= rows; i++)
             {
-                for (int j = 1; j <= cols; j++)
+                cell = Convert.ToString(excelRange.Cells[i, 1].Value2);
+                if (cell != null && cell.StartsWith("№"))
                 {
-                    if (excelRange.Cells[i, j].Value2 != null)
-                        excelSheet.Cells[1,1] = "1";
+                    rowOfNum = i;
+                    break;
+                }
+            }
+            cell = "1";
+            remoteDB.Connect(DB);
+            int lastWeb = rowOfNum;
+            String nameOfWeb = "Сеть", nameOfLEP = "", nameOfTable = "";
+            String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "isWork", "type" };
+            String query = "CREATE TABLE ";
+            for (int i = lastWeb + 1; i <= rows; i++)
+            {
+                cell = Convert.ToString(excelRange.Cells[i, 2].Value2);
+                if (i == lastWeb + 1)
+                    while (i <= rows)
+                    {
+                        cell = Convert.ToString(excelRange.Cells[i, 2].Value2);
+                        if (cell == null && Convert.ToString(excelRange.Cells[i, 1].Value2) != null)
+                        {
+                            nameOfWeb = Convert.ToString(excelRange.Cells[i, 1].Value2);
+                            nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
+                            query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
+                            remoteDB.makeQuery(query);
+                            i++;
+                            break;
+                        }
+                        i++;
+                    }
+                if (cell == null && Convert.ToString(excelRange.Cells[i, 1].Value2) != null)////////ЕСЛИ ЕСТЬ СЕТЬ
+                {
+                    nameOfWeb = Convert.ToString(excelRange.Cells[i, 1].Value2);
+                    nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
+                    query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
+                    remoteDB.makeQuery(query);
+                    continue;
+                }
+                if (cell != null)
+                {
+                    if (cell.StartsWith("ВЛ") || cell.StartsWith("КЛ") || cell.StartsWith("КВЛ") || cell.StartsWith("ВКЛ")) num = excelRange.Cells[i, 1].Value2;
+                    nameOfLEP = cell;
+                    remoteDB.makeQuery("INSERT INTO \"" + nameOfTable + "\" (\"" + pole[0] + "\",\"" + pole[1] + "\") " + "VALUES (\"" + num + "\", \"" + nameOfLEP + "\")");
+                }
+                if (nameOfLEP != "")
+                {
+                    DataTable res = remoteDB.getResTable("SELECT * FROM \"" + nameOfTable + "\" WHERE name = \"" + nameOfLEP + "\"");
+                    for (int k = 3; k <= cols && k < pole.Length; k++)
+                    {
+                        cell = Convert.ToString(excelRange.Cells[i, k].Value2);
+                        if (cell != null)
+                        {
+                            query = "UPDATE \"" + nameOfTable + "\" SET \"" + pole[k - 1] + "\" = \"";
+                            if (res.Rows[0].ItemArray[k].ToString() == "")
+                                query += cell + "\" WHERE name = \"" + nameOfLEP;
+                            else
+                                query += pole[k - 1] + "\" + \"" + cell + "\" WHERE name = \"" + nameOfLEP + "\"";
+                            remoteDB.makeQuery(query);
+                        }
+                    }
                 }
             }
             excelApp.Quit();
@@ -383,15 +442,15 @@ namespace window3
             }
         }
 
-        private void выбратьСетевуюПапкуСБДToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DBPicker.ShowDialog();
-        }
-
         private void DBPicker_FileOk(object sender, CancelEventArgs e)
         {
             DB = ((OpenFileDialog)sender).FileName;
             localDB.makeQuery("update config set path = \"" + DB + "\" where id = 1");
+        }
+
+        private void выбратьБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DBPicker.ShowDialog();
         }
     }
 }

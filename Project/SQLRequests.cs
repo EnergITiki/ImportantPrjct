@@ -47,6 +47,20 @@ namespace window3
             }
             return dTable;
         }
+        public String getRes(string Query)
+        {
+            DataTable dTable = new DataTable();
+            try
+            {
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(Query, m_dbConn);
+                adapter.Fill(dTable);
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return dTable.Rows[0].ItemArray[0].ToString();
+        }
         public bool isThereRes(string Query)
         {
             DataTable dTable = new DataTable();

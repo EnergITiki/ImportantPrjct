@@ -33,6 +33,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выбратьСетевуюПапкуСБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выбратьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameLabel = new System.Windows.Forms.Label();
             this.buttonGetID = new System.Windows.Forms.Button();
             this.buttonChange = new System.Windows.Forms.Button();
@@ -91,17 +93,32 @@
             // 
             this.выходToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(71, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(73, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.ВыходToolStripMenuItem_Click);
             // 
             // выбратьСетевуюПапкуСБДToolStripMenuItem
             // 
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выбратьБДToolStripMenuItem,
+            this.создатьБДToolStripMenuItem});
             this.выбратьСетевуюПапкуСБДToolStripMenuItem.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.выбратьСетевуюПапкуСБДToolStripMenuItem.Name = "выбратьСетевуюПапкуСБДToolStripMenuItem";
-            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Text = "Выбрать сетевую папку с БД";
-            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Click += new System.EventHandler(this.выбратьСетевуюПапкуСБДToolStripMenuItem_Click);
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.выбратьСетевуюПапкуСБДToolStripMenuItem.Text = "Сетевая папка с БД";
+            // 
+            // выбратьБДToolStripMenuItem
+            // 
+            this.выбратьБДToolStripMenuItem.Name = "выбратьБДToolStripMenuItem";
+            this.выбратьБДToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.выбратьБДToolStripMenuItem.Text = "Выбрать БД";
+            this.выбратьБДToolStripMenuItem.Click += new System.EventHandler(this.выбратьБДToolStripMenuItem_Click);
+            // 
+            // создатьБДToolStripMenuItem
+            // 
+            this.создатьБДToolStripMenuItem.Name = "создатьБДToolStripMenuItem";
+            this.создатьБДToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.создатьБДToolStripMenuItem.Text = "Создать БД";
             // 
             // nameLabel
             // 
@@ -247,11 +264,11 @@
             // 
             // NameCompany
             // 
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(790, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(257, 32);
-            this.textBox1.TabIndex = 15;
+            this.NameCompany.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NameCompany.Location = new System.Drawing.Point(790, 71);
+            this.NameCompany.Name = "NameCompany";
+            this.NameCompany.Size = new System.Drawing.Size(257, 32);
+            this.NameCompany.TabIndex = 15;
             // 
             // button3
             // 
@@ -374,5 +391,7 @@
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.ToolStripMenuItem выбратьСетевуюПапкуСБДToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog DBPicker;
+        private System.Windows.Forms.ToolStripMenuItem выбратьБДToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьБДToolStripMenuItem;
     }
 }
