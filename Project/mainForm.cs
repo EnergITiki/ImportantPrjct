@@ -129,6 +129,7 @@ namespace window3
             this.Close();
         }
 
+
         //Кнопка получить отчет
         private void buttonGetRep_Click(object sender, EventArgs e)
         {
@@ -142,29 +143,43 @@ namespace window3
 
             // Вставка текста в начало документа и отступа после
             Word.Paragraph oPara1;
-
-            // Старый способ
-            //oPara1 = oDoc.Content.Paragraphs.Add(ref oMissing);
+            string str = "Анализ технического состояния и возрастная " +
+    "структура линий электропередачи и подстанций";
             oPara1 = oDoc.Content.Paragraphs.Add();
-
-            oPara1.Range.Text = "Заголовок № 1 с тенью";
-
-            oPara1.Range.Font.Size = 20; // Размер шрифта: 20
-
-            oPara1.Range.Font.Shadow = 1; // Тенью от шрифта
-
+            oPara1.Range.Text = str;
+            oPara1.Range.Font.Size = 14; // Размер шрифта
             oPara1.Range.Font.Bold = 1; // "Жирный" шрифт
-
-            oPara1.Format.SpaceAfter = 24; // 24 пт.: оступ после параграфа
-
+            oPara1.Format.SpaceAfter = 20; // оступ после параграфа
             oPara1.Range.InsertParagraphAfter();
 
-            oPara1.Range.Font.Size = 12; // Размер шрифта: 12
+            //тут обращение к БД название компании
+            string CompName = "Имя компании";
 
-            oPara1.Range.Font.Shadow = 0; // Тенью от шрифта: выключаем
+            Word.Paragraph oPara2;
+            object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara2 = oDoc.Content.Paragraphs.Add(ref oRng);
+            oPara2.Range.Text = CompName;
+            oPara2.Format.SpaceAfter = 1; // Отступ после
+            oPara2.Range.InsertParagraphAfter();
+
+            str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
+                "110 кВ, находящихся в собственности " + CompName + ", по состоянию на " +
+                "01.01.2019 г. составили:" + "\n";
+
+            Word.Paragraph oPara3;
+            object oRng1 = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara3 = oDoc.Content.Paragraphs.Add(ref oRng1);
+            oPara3.Range.Text = str;
+            oPara3.Format.SpaceAfter = 6; // Отступ после
+            oPara3.Range.InsertParagraphAfter();
 
 
-            // Вставка текста и отступа после (для последующих частей документа)
+
+
+
+
+
+            /*// Вставка текста и отступа после (для последующих частей документа)
             Word.Paragraph oPara2;
 
             object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
@@ -176,10 +191,10 @@ namespace window3
             oPara2.Format.SpaceAfter = 6; // Отступ после
 
             oPara2.Range.InsertParagraphAfter();
-
+*/
 
             // Вставка текста
-            Word.Paragraph oPara3;
+            /*Word.Paragraph oPara3;
 
             oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
 
@@ -191,7 +206,7 @@ namespace window3
 
             oPara3.Format.SpaceAfter = 24;
 
-            oPara3.Range.InsertParagraphAfter();
+            oPara3.Range.InsertParagraphAfter();*/
 
 
             // Вставка таблицы 3 на 5, заполнение данными, и изменение первой строки: "жирный" и "курсив".
