@@ -28,6 +28,18 @@ namespace window3
         String DB = "";
         SQLRequests localDB = new SQLRequests();
         SQLRequests remoteDB = new SQLRequests();
+        String[] VLstamps = { "М-",
+                            "А-" ,
+                            "АС-" ,
+                            "АСО-" ,
+                            "АСУ-" ,
+                            "АСК-" ,
+                            "АН-" ,
+                            "АЖ-" ,
+                            "АСКП-" ,
+                            "АСКС-" ,
+                            "АССС " ,
+                            "АПС-"}; 
         int pathButt = 0;
 
         public mainForm()
@@ -40,7 +52,7 @@ namespace window3
         {
             ClientSize = new System.Drawing.Size(535, ClientSize.Height);
             localDB.Connect("local.db");
-            if (localDB.isThereRes("SELECT name from sqlite_master where type= \"table\"")){
+            if (localDB.isThereRes("SELECT name from sqlite_master where type= 'table'")){
                 DataTable res = localDB.getResTable("SELECT path FROM config");
                 DB = res.Rows[0].ItemArray[0].ToString();
             }
@@ -372,8 +384,8 @@ namespace window3
 
             PrintText("\n", 1, 0, 0, 1);
 
-            str = "Рисунок " + PictureNum.ToString() + " - возрастная характеристика ВЛ, КЛ и ПС 110 кВ \"" +
-                FilialName + "\" на 01.01.2019 г.";
+            str = "Рисунок " + PictureNum.ToString() + " - возрастная характеристика ВЛ, КЛ и ПС 110 кВ '" +
+                FilialName + "' на 01.01.2019 г.";
             PrintText(str, 12, 1, 0, 5);
 
             PictureNum += 0.1;
@@ -382,7 +394,7 @@ namespace window3
         public void Filials(string CompName)//Филиалы
         {
             string FilialName = "Сети кое какие";//тут в БД обращение!
-            string str = "\t" + "Филиал компании \"" + CompName + "\" \"" + FilialName + "\"";
+            string str = "\t" + "Филиал компании '" + CompName + "' '" + FilialName + "'";
             PrintText(str, 12, 1, 0, 1);
 
             str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
@@ -397,7 +409,7 @@ namespace window3
             PrintTable(VL, KL, P, count);
 
             str = "\t" + "Анализ технического состояния электросетевых объектов " +
-                "напряжением 110 кВ \"" + FilialName + "\" показал: ";
+                "напряжением 110 кВ '" + FilialName + "' показал: ";
             PrintText(str, 12, 0, 0, 6);
 
             //Делаем маркированный список
@@ -485,7 +497,7 @@ namespace window3
             {
                 Word.Paragraph oPara1;
                 oPara1 = oDoc.Content.Paragraphs.Add();
-                oPara1.Range.Text = "\t\"" + CompName + "\"";
+                oPara1.Range.Text = "\t'" + CompName + "'";
                 oPara1.Range.Font.Name = "Times New Roman";
                 oPara1.Range.Font.Size = 12; // Размер шрифта
                 oPara1.Range.Font.Bold = 1; // "Жирный" шрифт
@@ -498,7 +510,7 @@ namespace window3
             }
             else
             {
-                PrintText("\t\"" + CompName + "\"", 12, 1, 0, 1);
+                PrintText("\t'" + CompName + "'", 12, 1, 0, 1);
             }
 
 
@@ -535,7 +547,7 @@ namespace window3
 
             for(int i =0; i < temp.Count; i++)
             {
-                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = ''");
                 for (int j = 0; j < lenTable.Rows.Count; j++)
                 {
                     VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
@@ -554,7 +566,7 @@ namespace window3
 
             for (int i = 0; i < temp.Count; i++)
             {
-                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = ''");
                 for (int j = 0; j < lenTable.Rows.Count; j++)
                 {
                     VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
@@ -660,7 +672,7 @@ namespace window3
             remoteDB.Connect(DB);
             int lastWeb = rowOfNum;
             int id = 1;
-            String nameOfWeb = "Сеть", nameOfTable = "", nameOfLEP = "";
+            String nameOfWeb = "Сеть", nameOfTable = "", nameOfLEP = "", stampOfLEP = "";
             int idOfLEP = 1;
             String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "", "", "", "", "", "isWork"};
             String query = "CREATE TABLE ";
@@ -675,7 +687,7 @@ namespace window3
                         {
                             nameOfWeb = Convert.ToString(excelRange.Cells[i, 1].Value2);
                             nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
-                            query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
+                            query = "CREATE TABLE '" + nameOfTable + "' (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
                             remoteDB.makeQuery(query);
                             break;
                         }
@@ -685,8 +697,9 @@ namespace window3
                 {
                     nameOfWeb = Convert.ToString(excelRange.Cells[i, 1].Value2);
                     nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
-                    query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
+                    query = "CREATE TABLE '" + nameOfTable + "' (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
                     nameOfLEP = "";
+
                     id = 1;
                     remoteDB.makeQuery(query);
                     continue;
@@ -700,33 +713,52 @@ namespace window3
                         String temp = Convert.ToString(excelRange.Cells[i, 1].Value2);
                         num = Convert.ToDouble(temp.Split('.')[0]+','+temp.Split('.')[1]); 
                     }
-                    if (cell.StartsWith("ВЛ") || cell.StartsWith("КЛ") || cell.StartsWith("КВЛ") || cell.StartsWith("ВКЛ"));
+                    int type = -1;
+                    if (cell.StartsWith("ВЛ")) type = 1;
+                    else if (cell.StartsWith("КЛ")) type = 2;
+                    else if (cell.StartsWith("ВКЛ") || cell.StartsWith("КВЛ")) 
+                        type = 0;
                     nameOfLEP = cell;
                     idOfLEP = id;
-                    remoteDB.makeQuery("INSERT INTO \"" + nameOfTable + "\" (\"" + pole[0] + "\",\"" + pole[1] + "\") " + "VALUES (\"" + num + "\", \"" + nameOfLEP + "\")");
+                    if(type >= 0)
+                        remoteDB.makeQuery("INSERT INTO '" + nameOfTable + "' ('" + pole[0] + "','" + pole[1] + "','type') " + "VALUES ('" + num + "', '" + nameOfLEP + "','" + type + "')");
+                    else remoteDB.makeQuery("INSERT INTO '" + nameOfTable + "' ('" + pole[0] + "','" + pole[1] + "') " + "VALUES ('" + num + "', '" + nameOfLEP + "')");
                     id++;
                 }
                 if (nameOfLEP != "")
                 {
-                    DataTable res = remoteDB.getResTable("SELECT * FROM \"" + nameOfTable + "\" WHERE id = \"" + idOfLEP + "\"");
+                    DataTable res = remoteDB.getResTable("SELECT * FROM '" + nameOfTable + "' WHERE id = '" + idOfLEP + "'");
                     for (int k = 3, val = 0; k <= cols && k < pole.Length && res.Rows.Count > 0; k++)
                     {
                         if (pole[k - 1] == "") continue;
                         cell = Convert.ToString(excelRange.Cells[i, k].Value2);
                         if (cell != null)
                         {
-                            query = "UPDATE \"" + nameOfTable + "\" SET " + pole[k - 1] + " = ";
+                            query = "UPDATE '" + nameOfTable + "' SET " + pole[k - 1] + " = ";
 
                             if (res.Rows[0].ItemArray[val + 3].ToString() == "")
                             {
-                                query += "\"" + cell + "\" WHERE id = \"" + idOfLEP + "\"";
+                                query += "'" + cell + "' WHERE id = '" + idOfLEP + "'";
                             }
                             else
                             {
                                 String temp = res.Rows[0].ItemArray[val + 3].ToString() + ";" + cell;
-                                query += "\"" + temp + "\" WHERE id = \"" + idOfLEP + "\"";
+                                query += "'" + temp + "' WHERE id = '" + idOfLEP + "'";
                             }
                             remoteDB.makeQuery(query);
+                            if(pole[k - 1] == "stamp")
+                            {
+                                bool check = false;
+                                foreach (String st in VLstamps)
+                                {
+                                    if (cell.Contains(st)) check = true;
+                                }
+                                if (nameOfLEP.StartsWith("ВКЛ") || nameOfLEP.StartsWith("КВЛ")) ;
+                                else if (check)
+                                    remoteDB.makeQuery("UPDATE '" + nameOfTable + "' SET type = 1 WHERE id = '" + idOfLEP + "'");
+                                else
+                                    remoteDB.makeQuery("UPDATE '" + nameOfTable + "' SET type = 2 WHERE id = '" + idOfLEP + "'");
+                            }
                         }
                         val++;
                     }
@@ -758,7 +790,7 @@ namespace window3
         private void DBPicker_FileOk(object sender, CancelEventArgs e)
         {
             DB = ((OpenFileDialog)sender).FileName;
-            localDB.makeQuery("update config set path = \"" + DB + "\" where id = 1");
+            localDB.makeQuery("update config set path = '" + DB + "' where id = 1");
         }
 
         private void выбратьБДToolStripMenuItem_Click(object sender, EventArgs e)

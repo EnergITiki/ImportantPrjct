@@ -87,7 +87,7 @@
             this.buttonUppload.FlatAppearance.BorderSize = 0;
             this.buttonUppload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.buttonUppload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonUppload.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonUppload.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonUppload.ForeColor = System.Drawing.Color.White;
             this.buttonUppload.Location = new System.Drawing.Point(12, 206);
             this.buttonUppload.Name = "buttonUppload";
@@ -134,14 +134,14 @@
             // выбратьБДToolStripMenuItem
             // 
             this.выбратьБДToolStripMenuItem.Name = "выбратьБДToolStripMenuItem";
-            this.выбратьБДToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.выбратьБДToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.выбратьБДToolStripMenuItem.Text = "Выбрать БД";
             this.выбратьБДToolStripMenuItem.Click += new System.EventHandler(this.выбратьБДToolStripMenuItem_Click);
             // 
             // создатьБДToolStripMenuItem
             // 
             this.создатьБДToolStripMenuItem.Name = "создатьБДToolStripMenuItem";
-            this.создатьБДToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.создатьБДToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.создатьБДToolStripMenuItem.Text = "Создать БД";
             // 
             // nameLabel
@@ -161,7 +161,7 @@
             this.buttonGetID.FlatAppearance.BorderSize = 0;
             this.buttonGetID.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.buttonGetID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGetID.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonGetID.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonGetID.ForeColor = System.Drawing.Color.White;
             this.buttonGetID.Location = new System.Drawing.Point(12, 262);
             this.buttonGetID.Name = "buttonGetID";
@@ -177,7 +177,7 @@
             this.buttonChange.FlatAppearance.BorderSize = 0;
             this.buttonChange.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonChange.ForeColor = System.Drawing.Color.White;
             this.buttonChange.Location = new System.Drawing.Point(12, 317);
             this.buttonChange.Name = "buttonChange";
@@ -193,7 +193,7 @@
             this.buttonGetRep.FlatAppearance.BorderSize = 0;
             this.buttonGetRep.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.buttonGetRep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGetRep.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonGetRep.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonGetRep.ForeColor = System.Drawing.Color.White;
             this.buttonGetRep.Location = new System.Drawing.Point(12, 373);
             this.buttonGetRep.Name = "buttonGetRep";
@@ -250,9 +250,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(790, 173);
+            this.button1.Location = new System.Drawing.Point(790, 165);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 30);
+            this.button1.Size = new System.Drawing.Size(175, 43);
             this.button1.TabIndex = 12;
             this.button1.Text = "Выбрать...";
             this.button1.UseVisualStyleBackColor = false;
@@ -269,7 +269,7 @@
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(790, 213);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(175, 30);
+            this.button2.Size = new System.Drawing.Size(175, 43);
             this.button2.TabIndex = 13;
             this.button2.Text = "Выбрать...";
             this.button2.UseVisualStyleBackColor = false;
