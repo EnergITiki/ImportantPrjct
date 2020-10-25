@@ -526,14 +526,16 @@ namespace window3
             cell = "1";
             remoteDB.Connect(DB);
             int lastWeb = rowOfNum;
-            String nameOfWeb = "Сеть", nameOfLEP = "", nameOfTable = "";
-            String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "isWork", "type" };
+            int id = 1;
+            String nameOfWeb = "Сеть", nameOfTable = "", nameOfLEP = "";
+            int idOfLEP = 1;
+            String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "", "", "", "", "", "isWork"};
             String query = "CREATE TABLE ";
             for (int i = lastWeb + 1; i <= rows; i++)
             {
                 cell = Convert.ToString(excelRange.Cells[i, 2].Value2);
                 if (i == lastWeb + 1)
-                    while (i <= rows)
+                    while (i <= rows)/////////// ПЕРВОНАЧАЛЬНО ИЩЕМ СЕТЬ
                     {
                         cell = Convert.ToString(excelRange.Cells[i, 2].Value2);
                         if (cell == null && Convert.ToString(excelRange.Cells[i, 1].Value2) != null)
@@ -546,35 +548,54 @@ namespace window3
                         }
                         i++;
                     }
-                if (cell == null && Convert.ToString(excelRange.Cells[i, 1].Value2) != null)////////ЕСЛИ ЕСТЬ СЕТЬ
+                else if (cell == null && Convert.ToString(excelRange.Cells[i, 1].Value2) != null)////////ЕСЛИ ЕСТЬ СЕТЬ
                 {
                     nameOfWeb = Convert.ToString(excelRange.Cells[i, 1].Value2);
                     nameOfTable = NameCompany.Text + '_' + "2019" + '_' + "ЛЭП" + '_' + nameOfWeb;
                     query = "CREATE TABLE \"" + nameOfTable + "\" (id INTEGER PRIMARY KEY, num DOUBLE, name STRING, voltage INTEGER, checkNumber STRING,countOfChains INTEGER, length_all_oneChain DOUBLE,length_all_allChain DOUBLE, length_region_oneChain DOUBLE, length_region_allChain DOUBLE,stamp STRING, year INTEGER, isWork BOOLEAN,type INTEGER);";
+                    nameOfLEP = "";
+                    id = 1;
                     remoteDB.makeQuery(query);
                     continue;
                 }
-                if (cell != null)
+                else if (cell != null)
                 {
-                    if (cell.StartsWith("ВЛ") || cell.StartsWith("КЛ") || cell.StartsWith("КВЛ") || cell.StartsWith("ВКЛ")) num = excelRange.Cells[i, 1].Value2;
+                    try
+                    {
+                        if (Convert.ToString(excelRange.Cells[i, 1].Value2) != null) num = Convert.ToDouble(excelRange.Cells[i, 1].Value2);
+                    }catch(Exception qwe) {
+                        String temp = Convert.ToString(excelRange.Cells[i, 1].Value2);
+                        num = Convert.ToDouble(temp.Split('.')[0]+','+temp.Split('.')[1]); 
+                    }
+                    if (cell.StartsWith("ВЛ") || cell.StartsWith("КЛ") || cell.StartsWith("КВЛ") || cell.StartsWith("ВКЛ"));
                     nameOfLEP = cell;
+                    idOfLEP = id;
                     remoteDB.makeQuery("INSERT INTO \"" + nameOfTable + "\" (\"" + pole[0] + "\",\"" + pole[1] + "\") " + "VALUES (\"" + num + "\", \"" + nameOfLEP + "\")");
+                    id++;
                 }
                 if (nameOfLEP != "")
                 {
-                    DataTable res = remoteDB.getResTable("SELECT * FROM \"" + nameOfTable + "\" WHERE name = \"" + nameOfLEP + "\"");
-                    for (int k = 3; k <= cols && k < pole.Length; k++)
+                    DataTable res = remoteDB.getResTable("SELECT * FROM \"" + nameOfTable + "\" WHERE id = \"" + idOfLEP + "\"");
+                    for (int k = 3, val = 0; k <= cols && k < pole.Length && res.Rows.Count > 0; k++)
                     {
+                        if (pole[k - 1] == "") continue;
                         cell = Convert.ToString(excelRange.Cells[i, k].Value2);
                         if (cell != null)
                         {
-                            query = "UPDATE \"" + nameOfTable + "\" SET \"" + pole[k - 1] + "\" = \"";
-                            if (res.Rows[0].ItemArray[k].ToString() == "")
-                                query += cell + "\" WHERE name = \"" + nameOfLEP;
+                            query = "UPDATE \"" + nameOfTable + "\" SET " + pole[k - 1] + " = ";
+
+                            if (res.Rows[0].ItemArray[val + 3].ToString() == "")
+                            {
+                                query += "\"" + cell + "\" WHERE id = \"" + idOfLEP + "\"";
+                            }
                             else
-                                query += pole[k - 1] + "\" + \"" + cell + "\" WHERE name = \"" + nameOfLEP + "\"";
+                            {
+                                String temp = res.Rows[0].ItemArray[val + 3].ToString() + ";" + cell;
+                                query += "\"" + temp + "\" WHERE id = \"" + idOfLEP + "\"";
+                            }
                             remoteDB.makeQuery(query);
                         }
+                        val++;
                     }
                 }
             }
