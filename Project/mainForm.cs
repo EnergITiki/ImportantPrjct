@@ -510,8 +510,66 @@ namespace window3
             PrintText(str, 12, 0, 0, 5);
 
             //обращаемся к БД
-            double VL = 55555.5, KL = 785.6, P = 8000;
-            int count = 59;
+            double VL = 0, KL = 0, P = 0;
+            int count = 0;
+
+            DataTable res = remoteDB.getResTable("select * from sqlite_master where type = 'table'");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < res.Rows.Count; ++i)
+            {
+                String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
+                if (g == CompName)
+                {
+                    temp.Add(res.Rows[i].ItemArray[1].ToString());
+                }
+            }
+
+            //VL
+            for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from " + temp[i] + " where type = 1");
+                for( int j =0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            for(int i =0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            //KL
+            /*for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from " + temp[i] + " where type = 2");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }*/
+
+
+
+
+
+
+
+
+
             //Рисуем таблицу
             PrintTable(VL, KL, P, count);
 
