@@ -393,100 +393,113 @@ namespace window3
         }
         public void Filials(string CompName)//Филиалы
         {
-            string FilialName = "Сети кое какие";//тут в БД обращение!
-            string str = "\t" + "Филиал компании '" + CompName + "' '" + FilialName + "'";
-            PrintText(str, 12, 1, 0, 1);
-
-            str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
-            "110 кВ, находящихся в собственности " + FilialName + ", по состоянию на " +
-            "01.01.2019 г. составили:";
-            PrintText(str, 12, 0, 0, 5);
-
-            //обращаемся к БД
-            double VL = 88005, KL = 896.5, P = 2548;
-            int count = 100;
-            //Рисуем таблицу
-            PrintTable(VL, KL, P, count);
-
-            str = "\t" + "Анализ технического состояния электросетевых объектов " +
-                "напряжением 110 кВ '" + FilialName + "' показал: ";
-            PrintText(str, 12, 0, 0, 6);
-
-            //Делаем маркированный список
-
-            //Обращаемся к базам данных
-            int countPods = 15;
-            double pocOldPods = 28.8;
-            int countP = 122;
-            double procOldTrans = 3.6;
-            double lengthV = 1396.6;
-            double procAllLenV = 84.2;
-            double lengthK = 82.1;
-            double procAllLenK = 100;
-
-            str = countPods.ToString() + " подстанций ( " + pocOldPods.ToString() + "% " +
-                "от общего числа ПС 110 кВ) отработали более 50 лет;";
-            Word.Paragraph list;
-            list = oDoc.Content.Paragraphs.Add();
-            list.Range.Text = str;
-            list.Range.SetListLevel(1);
-            list.Range.ListFormat.ApplyBulletDefault(Word.WdListGalleryType.wdBulletGallery);
-            list.Range.InsertParagraphAfter();
-
-            str = countP.ToString() + " МВА трансформаторной мощности (" + procOldTrans.ToString() +
-                "% от общей трансформаторной мощности напряжением 110 кВ) отработало более 50 лет;";
-            PrintText(str, 12, 0, 0, 0);
-            str = "воздушные линии электропередачи 110 кВ протяженностью " + lengthV.ToString() +
-                " км в одноцепном исчислении(" + procAllLenV.ToString() + "% от общей " +
-                "протяженности ВЛ 110 кВ) отработали более 50 лет;";
-            PrintText(str, 12, 0, 0, 0);
-            str = "кабельные линии электропередачи 110 кВ протяженностью " + lengthK.ToString() +
-                " км (" + procAllLenK.ToString() + "% от общей протяженности КЛ 110 кВ) " +
-                "находятся в эксплуатации от 2 до 14 лет.";
-            list.OutlineDemoteToBody();
-
-            //Обращаемся к БД ПС
-            int[] arrYearPS = new int[4];
-            arrYearPS[0] = 68;
-            arrYearPS[1] = 67;
-            arrYearPS[2] = 64;
-            arrYearPS[3] = 63;
-
-            string[] arrNamePS = new string[4];
-            arrNamePS[0] = "Северная";
-            arrNamePS[1] = "Западная";
-            arrNamePS[2] = "Восточная";
-            arrNamePS[3] = "Южная";
-
-            str = "Наиболее продолжительное время эксплуатируются ПС 110 кВ " + arrNamePS[0] +
-                " - срок службы " + arrYearPS[0].ToString() + " лет, ПС 110 кВ " + arrNamePS[1] +
-                " – " + arrYearPS[1].ToString() + " лет, ПС 110 кВ " + arrNamePS[2] + " – " +
-                arrYearPS[2].ToString() + " года, ПС 110 кВ " + arrNamePS[3] + " – " + arrYearPS[3].ToString() +
-                " года.";
-            PrintText(str, 12, 0, 0, 5);
-
-            //Обращаемся к БД
-            int[] arrYearLP = new int[2];
-            arrYearLP[0] = 68;
-            arrYearLP[1] = 67;
+            DataTable res = remoteDB.getResTable("select * from sqlite_master where type = 'table'");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < res.Rows.Count; ++i)
+            {
+                String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
+                if (g == CompName)
+                {
+                    temp.Add(res.Rows[i].ItemArray[1].ToString().Split('_')[res.Rows[i].ItemArray[1].ToString().Split('_').Length-1]);
+                }
+            }
 
 
-            string[] arrNameLP = new string[2];//Дохуя вопросов хуячим, и склеиваем в одно
-            arrNameLP[0] = "ВЛ 110 кВ ПС1 – ПС2 I цепь (А-1), ВЛ 110 кВ ПС1 – ПС2 II цепь (А-2)";
-            arrNameLP[1] = "Какие то другие цепи";
+            for (int i = 0; i < temp.Count; i++)
+            {
+                string FilialName = temp[i];
 
-            str = "Наиболее продолжительное время находятся в эксплуатации следующие линии " +
-                "электропередачи 110 кВ: " + arrNameLP[0] + ", " + arrYearLP[0].ToString() + " лет, " +
-                arrNameLP[1] + ", " + arrYearLP[1].ToString() + "лет.";
-            PrintText(str, 12, 0, 0, 5);
+                string str = "\t" + "Филиал компании \"" + CompName + "\" \"" + FilialName + "\"";
+                PrintText(str, 12, 1, 0, 1);
+
+                str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
+                "110 кВ, находящихся в собственности " + FilialName + ", по состоянию на " +
+                "01.01.2019 г. составили:";
+                PrintText(str, 12, 0, 0, 5);
+
+                //обращаемся к БД
+                double VL = 88005, KL = 896.5, P = 2548;
+                int count = 100;
+                //Рисуем таблицу
+                PrintTable(VL, KL, P, count);
+
+                str = "\t" + "Анализ технического состояния электросетевых объектов " +
+                    "напряжением 110 кВ \"" + FilialName + "\" показал: ";
+                PrintText(str, 12, 0, 0, 6);
+
+                //Делаем маркированный список
+
+                //Обращаемся к базам данных
+                int countPods = 15;
+                double pocOldPods = 28.8;
+                int countP = 122;
+                double procOldTrans = 3.6;
+                double lengthV = 1396.6;
+                double procAllLenV = 84.2;
+                double lengthK = 82.1;
+                double procAllLenK = 100;
+
+                str = countPods.ToString() + " подстанций ( " + pocOldPods.ToString() + "% " +
+                    "от общего числа ПС 110 кВ) отработали более 50 лет;";
+                Word.Paragraph list;
+                list = oDoc.Content.Paragraphs.Add();
+                list.Range.Text = str;
+                list.Range.SetListLevel(1);
+                list.Range.ListFormat.ApplyBulletDefault(Word.WdListGalleryType.wdBulletGallery);
+                list.Range.InsertParagraphAfter();
+
+                str = countP.ToString() + " МВА трансформаторной мощности (" + procOldTrans.ToString() +
+                    "% от общей трансформаторной мощности напряжением 110 кВ) отработало более 50 лет;";
+                PrintText(str, 12, 0, 0, 0);
+                str = "воздушные линии электропередачи 110 кВ протяженностью " + lengthV.ToString() +
+                    " км в одноцепном исчислении(" + procAllLenV.ToString() + "% от общей " +
+                    "протяженности ВЛ 110 кВ) отработали более 50 лет;";
+                PrintText(str, 12, 0, 0, 0);
+                str = "кабельные линии электропередачи 110 кВ протяженностью " + lengthK.ToString() +
+                    " км (" + procAllLenK.ToString() + "% от общей протяженности КЛ 110 кВ) " +
+                    "находятся в эксплуатации от 2 до 14 лет.";
+                list.OutlineDemoteToBody();
+
+                //Обращаемся к БД ПС
+                int[] arrYearPS = new int[4];
+                arrYearPS[0] = 68;
+                arrYearPS[1] = 67;
+                arrYearPS[2] = 64;
+                arrYearPS[3] = 63;
+
+                string[] arrNamePS = new string[4];
+                arrNamePS[0] = "Северная";
+                arrNamePS[1] = "Западная";
+                arrNamePS[2] = "Восточная";
+                arrNamePS[3] = "Южная";
+
+                str = "Наиболее продолжительное время эксплуатируются ПС 110 кВ " + arrNamePS[0] +
+                    " - срок службы " + arrYearPS[0].ToString() + " лет, ПС 110 кВ " + arrNamePS[1] +
+                    " – " + arrYearPS[1].ToString() + " лет, ПС 110 кВ " + arrNamePS[2] + " – " +
+                    arrYearPS[2].ToString() + " года, ПС 110 кВ " + arrNamePS[3] + " – " + arrYearPS[3].ToString() +
+                    " года.";
+                PrintText(str, 12, 0, 0, 5);
+
+                //Обращаемся к БД
+                int[] arrYearLP = new int[2];
+                arrYearLP[0] = 68;
+                arrYearLP[1] = 67;
+
+
+                string[] arrNameLP = new string[2];//Дохуя вопросов хуячим, и склеиваем в одно
+                arrNameLP[0] = "ВЛ 110 кВ ПС1 – ПС2 I цепь (А-1), ВЛ 110 кВ ПС1 – ПС2 II цепь (А-2)";
+                arrNameLP[1] = "Какие то другие цепи";
+
+                str = "Наиболее продолжительное время находятся в эксплуатации следующие линии " +
+                    "электропередачи 110 кВ: " + arrNameLP[0] + ", " + arrYearLP[0].ToString() + " лет, " +
+                    arrNameLP[1] + ", " + arrYearLP[1].ToString() + "лет.";
+                PrintText(str, 12, 0, 0, 5);
 
 
 
-            //Еще один цикл нахуй, все РЭСы просматриваем
-            RES(CompName, FilialName);
-
-
-
+                //Еще один цикл нахуй, все РЭСы просматриваем
+                RES(CompName, FilialName);
+            }
 
         }
         bool was = false;
@@ -538,7 +551,7 @@ namespace window3
             //VL
             for (int i = 0; i < temp.Count; i++)
             {
-                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from " + temp[i] + " where type = 1");
+                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from \"" + temp[i] + "\" where type = 1");
                 for( int j =0; j < lenTable.Rows.Count; j++)
                 {
                     VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
@@ -547,10 +560,13 @@ namespace window3
 
             for(int i =0; i < temp.Count; i++)
             {
-                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = ''");
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from \"" + temp[i] + "\" where type = 0");
                 for (int j = 0; j < lenTable.Rows.Count; j++)
                 {
-                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                    if (lenTable.Rows[j].ItemArray[0].ToString() != "")
+                    {
+                        VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                    }
                 }
             }
 
@@ -613,11 +629,12 @@ namespace window3
             //Обращаемся к БД, узнаем количество компаний
             remoteDB.Connect(DB);
 
-            DataTable res = remoteDB.getResTable("select * from sqlite_master where type = 'table'");
+            DataTable res = remoteDB.getResTable("select name from sqlite_master where type = 'table'");
             List<string> temp = new List<string>();
             for (int i = 0; i < res.Rows.Count; ++i)
             {
-                String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
+                String g = res.Rows[i].ItemArray[0].ToString().Split('_')[0];
+                //String g = res.Rows[i].ItemArray[0].ToString();
                 temp.Add(g);
             }
 
@@ -674,7 +691,7 @@ namespace window3
             int id = 1;
             String nameOfWeb = "Сеть", nameOfTable = "", nameOfLEP = "", stampOfLEP = "";
             int idOfLEP = 1;
-            String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "", "", "", "", "", "isWork"};
+            String[] pole = { "num", "name", "voltage", "checkNumber", "countOfChains", "length_all_oneChain", "length_all_allChain", "length_region_oneChain", "length_region_allChain", "", "", "stamp", "", "", "", "", "", "", "", "year", "", "", "", "", "", "isWork" };
             String query = "CREATE TABLE ";
             for (int i = lastWeb + 1; i <= rows; i++)
             {
@@ -709,9 +726,11 @@ namespace window3
                     try
                     {
                         if (Convert.ToString(excelRange.Cells[i, 1].Value2) != null) num = Convert.ToDouble(excelRange.Cells[i, 1].Value2);
-                    }catch(Exception qwe) {
+                    }
+                    catch (Exception qwe)
+                    {
                         String temp = Convert.ToString(excelRange.Cells[i, 1].Value2);
-                        num = Convert.ToDouble(temp.Split('.')[0]+','+temp.Split('.')[1]); 
+                        num = Convert.ToDouble(temp.Split('.')[0] + ',' + temp.Split('.')[1]);
                     }
                     int type = -1;
                     if (cell.StartsWith("ВЛ")) type = 1;
