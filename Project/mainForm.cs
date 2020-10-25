@@ -132,7 +132,7 @@ namespace window3
 
         double PictureNum = 1.1;
 
-        public void RES( string CompName, string FilialName) //РЭСы филиалов 
+        public void RES(string CompName, string FilialName) //РЭСы филиалов 
         {
             //Обращаемся к БД нахуй
             string[] NameRES = new string[1];//Имена РЭСов
@@ -146,7 +146,7 @@ namespace window3
                 "г., обслуживаемых " + FilialName;
             PrintText(str, 12, 0, 0, 5);
 
-            
+
             //Рисуем Диаграммы нахуй
             //Обращаемся к базам данных блять!!!!
             //Подстанции
@@ -353,7 +353,7 @@ namespace window3
             Bitmap bmp4 = new Bitmap(@"D:\\test4_1.jpeg"); //путь к твоей картинке
             Bitmap final_bmp = new Bitmap(bmp1_width * 2, bmp1_height * 2);
 
-            
+
             Graphics g = Graphics.FromImage(final_bmp);
             g.DrawImage(bmp1, 0, 0, bmp1_width, bmp1_height);
             g.DrawImage(bmp2, bmp1_width, 0, bmp1_width, bmp1_height);
@@ -361,8 +361,9 @@ namespace window3
             g.DrawImage(bmp4, bmp1_width, bmp1_height, bmp1_width, bmp1_height);
             g.Dispose();
 
+            final_bmp.Save("D:\\Result.jpeg");
             Image newImage = Image.FromFile("D:\\Result.jpeg");
-
+           
             Clipboard.SetImage(newImage);
 
             Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
@@ -389,7 +390,8 @@ namespace window3
             PrintText(str, 12, 1, 0, 5);
 
             PictureNum += 0.1;
-
+            newImage.Dispose();
+            File.Delete("D:\\Result.jpeg");
         }
         public void Filials(string CompName)//Филиалы
         {
@@ -400,7 +402,7 @@ namespace window3
                 String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
                 if (g == CompName)
                 {
-                    temp.Add(res.Rows[i].ItemArray[1].ToString().Split('_')[res.Rows[i].ItemArray[1].ToString().Split('_').Length-1]);
+                    temp.Add(res.Rows[i].ItemArray[1].ToString().Split('_')[res.Rows[i].ItemArray[1].ToString().Split('_').Length - 1]);
                 }
             }
 
@@ -504,7 +506,7 @@ namespace window3
         }
         bool was = false;
 
-        public void Companies( string CompName)// компании
+        public void Companies(string CompName)// компании
         {
             if (!was)
             {
@@ -552,13 +554,16 @@ namespace window3
             for (int i = 0; i < temp.Count; i++)
             {
                 DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from \"" + temp[i] + "\" where type = 1");
-                for( int j =0; j < lenTable.Rows.Count; j++)
+                for (int j = 0; j < lenTable.Rows.Count; j++)
                 {
-                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                    if (lenTable.Rows[j].ItemArray[0].ToString() != "")
+                    {
+                        VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                    }
                 }
             }
 
-            for(int i =0; i < temp.Count; i++)
+            for (int i = 0; i < temp.Count; i++)
             {
                 DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from \"" + temp[i] + "\" where type = 0");
                 for (int j = 0; j < lenTable.Rows.Count; j++)
@@ -614,11 +619,11 @@ namespace window3
         {
             oWord = new Word.Application(); // Запускаем Word
             oWord.Visible = true; // Делаем окно Word видимым
-           
+
 
             // Старый способ: здесь отражено наличие ключевого слова ref 
             //и параметра oMissing, которые можно не использовать
-            oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, 
+            oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing); // Создаём новый документ
 
             // Вставка текста в начало документа и отступа послe
