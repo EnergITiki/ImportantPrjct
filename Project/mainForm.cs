@@ -8,7 +8,8 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
 using System.Reflection;
 using System.Windows.Forms.DataVisualization.Charting;
-//using Microsoft.Office.Interop.Word;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace window3
 {
@@ -88,13 +89,14 @@ namespace window3
         public void PrintText(string text, int size, int bold, int Ital, int SpaceAfter)
         {
             Word.Paragraph oPara1;
-            oPara1 = oDoc.Content.Paragraphs.Add();
-            oPara1.Range.Text = text;
+            object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara1 = oDoc.Content.Paragraphs.Add(ref oRng);
             oPara1.Range.Font.Name = "Times New Roman";
             oPara1.Range.Font.Size = size; // Размер шрифта
             oPara1.Range.Font.Bold = bold; // "Жирный" шрифт
             oPara1.Range.Font.Italic = Ital; // "Курсив" шрифт
             oPara1.Format.SpaceAfter = SpaceAfter; // оступ после параграфа
+            oPara1.Range.Text = text;
             oPara1.Range.InsertParagraphAfter();
 
             oPara1.Range.Font.Bold = 0; // "Жирный" шрифт
@@ -132,7 +134,7 @@ namespace window3
                 "г., обслуживаемых " + FilialName;
             PrintText(str, 12, 0, 0, 5);
 
-
+            
             //Рисуем Диаграммы нахуй
             //Обращаемся к базам данных блять!!!!
             //Подстанции
@@ -171,7 +173,9 @@ namespace window3
             chart1.Titles.Add("Подстанции (штук, %) 110 кВ");
             chart1.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
             chart1.Legends[0].Font = new Font("Times New Roman", 9);
-          
+
+            chart1.Series[0].Points.Clear();
+
             chart1.Series[0].Points.AddY(Pods[0]);
             chart1.Series[0].Points.AddY(Pods[1]);
             chart1.Series[0].Points.AddY(Pods[2]);
@@ -198,10 +202,9 @@ namespace window3
 
             // Масштабируем до нужного размера
             var image2 = new Bitmap(image1, 600, 400);
-            image2.Save("D:\\test2.jpeg");
+            image2.Save("D:\\test1_1.jpeg");
 
             var pPicture = oDoc.Paragraphs.Last.Range;
-            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
 
             image1.Dispose();
             image2.Dispose();
@@ -213,6 +216,8 @@ namespace window3
             chart2.Titles.Add("Трансформаторы (МВА, %) 110 кВ");
             chart2.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
             chart2.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart2.Series[0].Points.Clear();
 
             chart2.Series[0].Points.AddY(Trans[0]);
             chart2.Series[0].Points.AddY(Trans[1]);
@@ -229,19 +234,18 @@ namespace window3
             chart2.ChartAreas[0].Area3DStyle.Enable3D = true;
 
             //Сохраняем епта
-            chart2.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            chart2.SaveImage(@"D:\\test2.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
 
-            pathFileImage = "D:\\test1.jpeg";
+            pathFileImage = "D:\\test2.jpeg";
 
             // Загружаем исходное изображение
             image1 = new Bitmap(pathFileImage);
 
             // Масштабируем до нужного размера
             image2 = new Bitmap(image1, 600, 400);
-            image2.Save("D:\\test2.jpeg");
+            image2.Save("D:\\test2_1.jpeg");
 
             pPicture = oDoc.Paragraphs.Last.Range;
-            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
 
             image1.Dispose();
             image2.Dispose();
@@ -253,6 +257,8 @@ namespace window3
             chart3.Titles.Add("Воздушные линии электропередачи в одноцепном исчислении(км, %) 110 кВ");
             chart3.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
             chart3.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart3.Series[0].Points.Clear();
 
             chart3.Series[0].Points.AddY(VL[0]);
             chart3.Series[0].Points.AddY(VL[1]);
@@ -269,19 +275,18 @@ namespace window3
             chart3.ChartAreas[0].Area3DStyle.Enable3D = true;
 
             //Сохраняем епта
-            chart3.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            chart3.SaveImage(@"D:\\test3.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
 
-            pathFileImage = "D:\\test1.jpeg";
+            pathFileImage = "D:\\test3.jpeg";
 
             // Загружаем исходное изображение
             image1 = new Bitmap(pathFileImage);
 
             // Масштабируем до нужного размера
             image2 = new Bitmap(image1, 600, 400);
-            image2.Save("D:\\test2.jpeg");
+            image2.Save("D:\\test3_1.jpeg");
 
             pPicture = oDoc.Paragraphs.Last.Range;
-            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
 
             image1.Dispose();
             image2.Dispose();
@@ -293,6 +298,8 @@ namespace window3
             chart4.Titles.Add("Кабельные линии электропередачи в одноцепном исчислении(км, %) 110 кВ");
             chart4.Titles[1].Font = new Font("Times New Roman", 12, FontStyle.Bold);
             chart4.Legends[0].Font = new Font("Times New Roman", 9);
+
+            chart4.Series[0].Points.Clear();
 
             chart4.Series[0].Points.AddY(KL[0]);
             chart4.Series[0].Points.AddY(KL[1]);
@@ -309,26 +316,67 @@ namespace window3
             chart4.ChartAreas[0].Area3DStyle.Enable3D = true;
 
             //Сохраняем епта
-            chart4.SaveImage(@"D:\\test1.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            chart4.SaveImage(@"D:\\test4.jpeg", System.Drawing.Imaging.ImageFormat.Jpeg);
 
-            pathFileImage = "D:\\test1.jpeg";
+            pathFileImage = "D:\\test4.jpeg";
 
             // Загружаем исходное изображение
             image1 = new Bitmap(pathFileImage);
 
             // Масштабируем до нужного размера
             image2 = new Bitmap(image1, 600, 400);
-            image2.Save("D:\\test2.jpeg");
+            image2.Save("D:\\test4_1.jpeg");
 
             pPicture = oDoc.Paragraphs.Last.Range;
-            oDoc.InlineShapes.AddPicture("D:\\test2.jpeg", Range: pPicture);
 
             image1.Dispose();
             image2.Dispose();
 
-            System.IO.File.Delete(@"D:\\test1.jpeg");
-            System.IO.File.Delete(@"D:\\test2.jpeg");
-      
+            Bitmap bmp1 = new Bitmap(@"D:\\test1_1.jpeg"); //путь к твоей картинке
+            int bmp1_width = bmp1.Width;
+            int bmp1_height = bmp1.Height;
+
+            Bitmap bmp2 = new Bitmap(@"D:\\test2_1.jpeg"); //путь к твоей картинке
+            Bitmap bmp3 = new Bitmap(@"D:\\test3_1.jpeg"); //путь к твоей картинке
+            Bitmap bmp4 = new Bitmap(@"D:\\test4_1.jpeg"); //путь к твоей картинке
+            Bitmap final_bmp = new Bitmap(bmp1_width * 2, bmp1_height * 2);
+
+            
+            Graphics g = Graphics.FromImage(final_bmp);
+            g.DrawImage(bmp1, 0, 0, bmp1_width, bmp1_height);
+            g.DrawImage(bmp2, bmp1_width, 0, bmp1_width, bmp1_height);
+            g.DrawImage(bmp3, 0, bmp1_height, bmp1_width, bmp1_height);
+            g.DrawImage(bmp4, bmp1_width, bmp1_height, bmp1_width, bmp1_height);
+            g.Dispose();
+
+            Image newImage = Image.FromFile("D:\\Result.jpeg");
+
+            Clipboard.SetImage(newImage);
+
+            Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+
+            // Вставит изображение из буфера обмена в конец документа
+
+            wrdRng.Paste();
+
+            bmp1.Dispose();
+            bmp2.Dispose();
+            bmp3.Dispose();
+            bmp4.Dispose();
+            final_bmp.Dispose();
+
+            Word.Paragraph oPara1;
+            object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+            oPara1 = oDoc.Content.Paragraphs.Add(ref oRng);
+            oPara1.Indent();
+
+            PrintText("\n", 1, 0, 0, 1);
+
+            str = "Рисунок " + PictureNum.ToString() + " - возрастная характеристика ВЛ, КЛ и ПС 110 кВ \"" +
+                FilialName + "\" на 01.01.2019 г.";
+            PrintText(str, 12, 1, 0, 5);
+
+            PictureNum += 0.1;
 
         }
         public void Filials(string CompName)//Филиалы
@@ -430,28 +478,98 @@ namespace window3
 
 
         }
+        bool was = false;
 
-        public void Companies()// компании
+        public void Companies( string CompName)// компании
         {
-            // Вставка текста в начало документа и отступа послe
-            string str = "Анализ технического состояния и возрастная " +
-            "структура линий электропередачи и подстанций";
-            PrintText(str, 12, 1, 0, 10);
+            if (!was)
+            {
+                Word.Paragraph oPara1;
+                oPara1 = oDoc.Content.Paragraphs.Add();
+                oPara1.Range.Text = "\t\"" + CompName + "\"";
+                oPara1.Range.Font.Name = "Times New Roman";
+                oPara1.Range.Font.Size = 12; // Размер шрифта
+                oPara1.Range.Font.Bold = 1; // "Жирный" шрифт
+                oPara1.Range.Font.Italic = 0; // "Курсив" шрифт
+                oPara1.Format.SpaceAfter = 1; // оступ после параграфа
+                oPara1.Range.InsertParagraphAfter();
+                oPara1.Range.Font.Bold = 0; // "Жирный" шрифт
+                oPara1.Range.Font.Italic = 0; // "Курсив" шрифт
+                was = true;
+            }
+            else
+            {
+                PrintText("\t\"" + CompName + "\"", 12, 1, 0, 1);
+            }
 
 
-            //тут обращение к БД название компании
-            string CompName = NameCompany.Text;//Пока так, потом из БД надо будет считывать нормально!
-            PrintText("\t\"" + CompName + "\"", 12, 1, 0, 1);
-
-
-            str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
+            string str = "\t" + "Протяженность ВЛ 110 кВ и КЛ 110 кВ, количество и суммарная мощность ПС " +
             "110 кВ, находящихся в собственности " + CompName + ", по состоянию на " +
             "01.01.2019 г. составили:";
+
             PrintText(str, 12, 0, 0, 5);
 
             //обращаемся к БД
-            double VL = 55555.5, KL = 785.6, P = 8000;
-            int count = 59;
+            double VL = 0, KL = 0, P = 0;
+            int count = 0;
+
+            DataTable res = remoteDB.getResTable("select * from sqlite_master where type = 'table'");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < res.Rows.Count; ++i)
+            {
+                String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
+                if (g == CompName)
+                {
+                    temp.Add(res.Rows[i].ItemArray[1].ToString());
+                }
+            }
+
+            //VL
+            for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from " + temp[i] + " where type = 1");
+                for( int j =0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            for(int i =0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            //KL
+            /*for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_all_oneChain from " + temp[i] + " where type = 2");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }
+
+            for (int i = 0; i < temp.Count; i++)
+            {
+                DataTable lenTable = remoteDB.getResTable("select length_region_oneChain from " + temp[i] + " where type = \"\"");
+                for (int j = 0; j < lenTable.Rows.Count; j++)
+                {
+                    VL += Convert.ToDouble(lenTable.Rows[j].ItemArray[0].ToString());
+                }
+            }*/
+
+
+
+
+
+
+
+
+
             //Рисуем таблицу
             PrintTable(VL, KL, P, count);
 
@@ -462,8 +580,6 @@ namespace window3
 
             //Сложная какая та логика в цикле, чтобы все  филиалы компании перебрать
             Filials(CompName);
-
-
 
         }
 
@@ -478,10 +594,28 @@ namespace window3
             oDoc = oWord.Documents.Add(ref oMissing, ref oMissing, ref oMissing, 
                 ref oMissing); // Создаём новый документ
 
-            //в цикле блять хуячим компании
-            Companies();
+            // Вставка текста в начало документа и отступа послe
+            string str = "Анализ технического состояния и возрастная " +
+            "структура линий электропередачи и подстанций";
+            PrintText(str, 12, 1, 0, 10);
 
+            //Обращаемся к БД, узнаем количество компаний
+            remoteDB.Connect(DB);
 
+            DataTable res = remoteDB.getResTable("select * from sqlite_master where type = 'table'");
+            List<string> temp = new List<string>();
+            for (int i = 0; i < res.Rows.Count; ++i)
+            {
+                String g = res.Rows[i].ItemArray[1].ToString().Split('_')[0];
+                temp.Add(g);
+            }
+
+            List<string> compNames = temp.Distinct().ToList();
+
+            for (int i = 0; i < compNames.Count; i++)
+            {
+                Companies(compNames[i]);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
